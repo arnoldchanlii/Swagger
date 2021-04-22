@@ -1,0 +1,261 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Employee API",
+    "description" : "Sample API to perform Employee operations",
+    "termsOfService" : "https://example.com/terms",
+    "contact" : {
+      "name" : "Arnold Chanliongco",
+      "url" : "https://twitter.com/arnoldchanlii",
+      "email" : "arnoldchanliongco@gmail.com"
+    },
+    "license" : {
+      "name" : "Employee API LICX",
+      "url" : "https://example.com/license"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/arnoldchanliongco/Sample_API/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "https://mla-cicd-test.azurewebsites.net/",
+    "description" : "Test server"
+  } ],
+  "paths" : {
+    "/api/Employees" : {
+      "get" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Gets the list of all Employees.",
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              },
+              "text/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Creates an Employee.",
+        "description" : "Sample request:\r\n\r\n    POST api/Employee\r\n    {\r\n      \"id\" : \"1\"\r\n      \"firstName\": \"Arnold\",\r\n      \"lastName\": \"Chanliongco\",\r\n      \"emailId\": \"arnoldchanliongco@gmail.com\"        \r\n    }",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            },
+            "text/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            },
+            "application/*+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Returns the newly created item",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "If the item is null",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Employees/{id}" : {
+      "get" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Gets employees by id.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "text/plain" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              },
+              "text/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Employee"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Edits employee record based on id.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            },
+            "text/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            },
+            "application/*+json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Employee"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Employees" ],
+        "summary" : "Deletes employee record from database.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Employee" : {
+        "required" : [ "emailId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "firstName" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "lastName" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "emailId" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "ProblemDetails" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "title" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "status" : {
+            "type" : "integer",
+            "format" : "int32",
+            "nullable" : true
+          },
+          "detail" : {
+            "type" : "string",
+            "nullable" : true
+          },
+          "instance" : {
+            "type" : "string",
+            "nullable" : true
+          }
+        },
+        "additionalProperties" : { }
+      }
+    }
+  }
+}
